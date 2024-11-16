@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input'; 
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import React, { useEffect, useState } from 'react';
 
 interface Product {
@@ -32,8 +34,6 @@ function ProductModal({ isOpen, onClose, product }: ProductModalProps) {
         }
     }, [product]);
 
-    if (!isOpen) return null;
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (product) {
@@ -45,47 +45,53 @@ function ProductModal({ isOpen, onClose, product }: ProductModalProps) {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <h2 className="text-lg font-bold mb-4">{product ? 'Editar Producto' : 'Agregar Producto'}</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Nombre</label>
+        <Dialog open={isOpen} onOpenChange={onClose}>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>{product ? 'Editar Producto' : 'Agregar Producto'}</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="nombre">Nombre</Label>
                         <Input
+                            id="nombre"
                             type="text"
                             value={nombre}
                             onChange={(e) => setNombre(e.target.value)}
-                            className="w-full"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Precio</label>
+                    <div className="space-y-2">
+                        <Label htmlFor="precio">Precio</Label>
                         <Input
+                            id="precio"
                             type="text"
                             value={precio}
                             onChange={(e) => setPrecio(e.target.value)}
-                            className="w-full"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Inventario</label>
+                    <div className="space-y-2">
+                        <Label htmlFor="inventario">Inventario</Label>
                         <Input
+                            id="inventario"
                             type="number"
                             value={inventario}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                setInventario(value ? parseInt(value) : 0); // Handle empty value
+                                setInventario(value ? parseInt(value) : 0);
                             }}
-                            className="w-full"
                         />
                     </div>
-                    <div className="flex justify-end">
-                        <Button variant="secondary" onClick={onClose} className="mr-2">Cancelar</Button>
-                        <Button type="submit" variant="default">{product ? 'Guardar Cambios' : 'Agregar Producto'}</Button>
+                    <div className="flex justify-end gap-2">
+                        <Button variant="outline" onClick={onClose}>
+                            Cancelar
+                        </Button>
+                        <Button type="submit">
+                            {product ? 'Guardar Cambios' : 'Agregar Producto'}
+                        </Button>
                     </div>
                 </form>
-            </div>
-        </div>
+            </DialogContent>
+        </Dialog>
     );
 }
 

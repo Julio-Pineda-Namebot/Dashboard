@@ -10,16 +10,15 @@ import {
   SidebarHeader,
   SidebarFooter
 } from "@/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings,Command } from "lucide-react";
+import { Calendar, Home, Inbox, Search, Settings, Command } from 'lucide-react';
 import { NavUser } from "./nav.user"
-
 
 const items = [
   { title: "Inicio", url: "/", icon: Home },
   { title: "Productos", url: "/products", icon: Inbox },
-  { title: "Calendario", url: "/", icon: Calendar },
-  { title: "Buscar", url: "/", icon: Search },
-  { title: "Ajustes", url: "/", icon: Settings },
+  { title: "Calendario", url: "/calendar", icon: Calendar },
+  { title: "Buscar", url: "/search", icon: Search },
+  { title: "Ajustes", url: "/settings", icon: Settings },
 ];
 
 const data = {
@@ -30,49 +29,44 @@ const data = {
     },
 }
 
-export function AppSidebar() {
-  
+export function AppSidebar({ navigate }: { navigate: (to: string) => void }) {
   return (
-      <Sidebar collapsible="icon" variant="floating">
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild>
-                <a href="#">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                    <Command className="size-4" />
-                  </div>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">FULL GAMES</span>
-                    <span className="truncate text-xs">Empresa</span>
-                  </div>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-          </SidebarHeader>
-          <SidebarContent>
-              <SidebarGroup>
-                  <SidebarGroupLabel>Entorno</SidebarGroupLabel>
-                  <SidebarGroupContent>
-                      <SidebarMenu>
-                          {items.map((item) => (
-                              <SidebarMenuItem key={item.title}>
-                                  <SidebarMenuButton asChild>
-                                  <a href={item.url}>
-                                    <item.icon />
-                                    <span>{item.title}</span>
-                                  </a>
-                                  </SidebarMenuButton>
-                              </SidebarMenuItem>
-                          ))}
-                      </SidebarMenu>
-                  </SidebarGroupContent>
-              </SidebarGroup>
-          </SidebarContent>
-        <SidebarFooter>
-            <NavUser user={data.user} />
-        </SidebarFooter>
-      </Sidebar>
+    <Sidebar collapsible="icon" variant="floating">
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" onClick={() => navigate('/')}>
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <Command className="size-4" />
+              </div>
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-semibold">FULL GAMES</span>
+                <span className="truncate text-xs">Empresa</span>
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Entorno</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton onClick={() => navigate(item.url)}>
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+    </Sidebar>
   );
 }

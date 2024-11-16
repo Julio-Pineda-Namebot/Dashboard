@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import ProductModal from '@/components/products/productModel';
+import { Card } from '@/components/ui/card';
 
 interface Product {
     id: number;
@@ -30,35 +31,56 @@ function ProductTable() {
     };
 
     return (
-        <div className="overflow-x-auto bg-background">
-            <Button onClick={handleAddProduct} className="mb-4">Agregar Producto</Button>
-            <table className="min-w-full table-auto bg-white rounded-lg shadow-md border border-muted">
-                <thead className="bg-muted">
-                    <tr>
-                        <th className="px-4 py-2 text-left font-medium text-sm text-muted-foreground">ID</th>
-                        <th className="px-4 py-2 text-left font-medium text-sm text-muted-foreground">Nombre</th>
-                        <th className="px-4 py-2 text-left font-medium text-sm text-muted-foreground">Precio</th>
-                        <th className="px-4 py-2 text-left font-medium text-sm text-muted-foreground">Inventario</th>
-                        <th className="px-4 py-2 text-left font-medium text-sm text-muted-foreground">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map((product) => (
-                        <tr key={product.id} className="hover:bg-muted-light">
-                            <td className="px-4 py-2 text-sm">{product.id}</td>
-                            <td className="px-4 py-2 text-sm">{product.nombre}</td>
-                            <td className="px-4 py-2 text-sm">{product.precio}</td>
-                            <td className="px-4 py-2 text-sm">{product.inventario}</td>
-                            <td className="px-4 py-2 text-sm">
-                                <Button variant="link" onClick={() => handleEditProduct(product)}>Editar</Button>
-                                <Button variant="link" className="text-red-600">Eliminar</Button>
-                            </td>
+        <Card className="w-full p-4">
+            <div className="flex justify-between items-center mb-4">
+                <h1 className="text-2xl font-bold text-foreground">Gestión de Productos</h1>
+                <Button onClick={handleAddProduct}>Agregar Producto</Button>
+            </div>
+            <div className="relative w-full overflow-auto">
+                <table className="w-full caption-bottom text-sm">
+                    <thead className="[&_tr]:border-b">
+                        <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">ID</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Nombre</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Precio</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Inventario</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="[&_tr:last-child]:border-0">
+                        {products.map((product) => (
+                            <tr
+                                key={product.id}
+                                className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+                            >
+                                <td className="p-4 align-middle text-foreground">{product.id}</td>
+                                <td className="p-4 align-middle text-foreground">{product.nombre}</td>
+                                <td className="p-4 align-middle text-foreground">{product.precio}</td>
+                                <td className="p-4 align-middle text-foreground">{product.inventario}</td>
+                                <td className="p-4 align-middle">
+                                    <div className="flex gap-2">
+                                        <Button 
+                                            variant="ghost" 
+                                            onClick={() => handleEditProduct(product)}
+                                            className="hover:text-primary"
+                                        >
+                                            Editar
+                                        </Button>
+                                        <Button 
+                                            variant="ghost" 
+                                            className="hover:text-destructive"
+                                        >
+                                            Eliminar
+                                        </Button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} product={productSelect} />
-        </div>
+        </Card>
     );
 }
 
