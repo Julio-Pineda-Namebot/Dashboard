@@ -9,6 +9,10 @@ import { Separator } from "@/components/ui/separator"
 import { ModeToggle } from '@/components/Mode/ModeToggle';
 import { ClientRouter } from "@/components/ClienteRouter";
 import ProductTable from '@/app/products/producTable';
+import MyCarousel from '@/components/Inicio/dashboard-carrusel';
+import ProductCard from '@/components/Inicio/cards';
+import BarChartInteractive from '@/components/Inicio/chart';
+import Calendar from '@/components/Calendario/calendar';
 
 export default function Sidebar({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(true);
@@ -29,10 +33,21 @@ export default function Sidebar({ children }: { children?: React.ReactNode }) {
               </header>
               <main className="flex-1">
                 <div className="h-[calc(100vh-4rem)] overflow-auto p-4">
-                  {currentPath === '/dashboard' && <div>{children}</div>}
+                {currentPath === '/dashboard' && (
+                    <div className="p-4 bg-background">
+                      <MyCarousel />
+                      <ProductCard />
+                      <BarChartInteractive />
+                    </div>
+                  )}
                   {currentPath === '/dashboard/products' && (
                     <div className="p-4 bg-background">
                       <ProductTable />
+                    </div>
+                  )}
+                  {currentPath === '/dashboard/calendar' && (
+                    <div className="p-4 bg-background">
+                      <Calendar />
                     </div>
                   )}
                 </div>
