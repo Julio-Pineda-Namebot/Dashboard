@@ -1,0 +1,12 @@
+---
+import ProductTable from '@/app/products/producTable';
+import Layout from '@/layouts/Layout.astro';
+import Sidebar from '@/app/sidebar/dashboard';
+import '@/styles/global.css';
+---
+
+<Layout title="Productos - FULL GAMES">
+    <Sidebar client:only="react">
+        <ProductTable client:only="react" />
+    </Sidebar>
+</Layout>

@@ -14,11 +14,11 @@ import { Calendar, Home, Inbox, Search, Settings, Command } from 'lucide-react';
 import { NavUser } from "./nav.user"
 
 const items = [
-  { title: "Inicio", url: "/", icon: Home },
-  { title: "Productos", url: "/products", icon: Inbox },
-  { title: "Calendario", url: "/calendar", icon: Calendar },
-  { title: "Buscar", url: "/search", icon: Search },
-  { title: "Ajustes", url: "/settings", icon: Settings },
+  { title: "Inicio", url: "/dashboard", icon: Home },
+  { title: "Productos", url: "/dashboard/products", icon: Inbox },
+  { title: "Calendario", url: "/dashboard/calendar", icon: Calendar },
+  { title: "Buscar", url: "/dashboard/search", icon: Search },
+  { title: "Ajustes", url: "/dashboard/settings", icon: Settings },
 ];
 
 const data = {

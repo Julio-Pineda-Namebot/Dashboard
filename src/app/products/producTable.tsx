@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
-import ProductModal from '@/components/products/productModel';
+import ProductModal from '@/app/products/productModel';
 import { Card } from '@/components/ui/card';
 
 interface Product {
@@ -31,13 +31,13 @@ function ProductTable() {
     };
 
     return (
-        <Card className="w-full p-4">
+        <Card className="w-full h-full flex flex-col p-4">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold text-foreground">Gestión de Productos</h1>
                 <Button onClick={handleAddProduct}>Agregar Producto</Button>
             </div>
-            <div className="relative w-full overflow-auto">
-                <table className="w-full caption-bottom text-sm">
+            <div className="relative flex-1 overflow-auto">
+                <table className="w-full text-sm">
                     <thead className="[&_tr]:border-b">
                         <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                             <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">ID</th>
