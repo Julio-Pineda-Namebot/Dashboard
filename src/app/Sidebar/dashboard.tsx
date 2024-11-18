@@ -13,6 +13,7 @@ import MyCarousel from '@/components/Inicio/dashboard-carrusel';
 import ProductCard from '@/components/Inicio/cards';
 import BarChartInteractive from '@/components/Inicio/chart';
 import Calendar from '@/components/Calendario/calendar';
+import {AccordionDemo} from '@/components/Info/info';
 
 export default function Sidebar({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(true);
@@ -48,6 +49,11 @@ export default function Sidebar({ children }: { children?: React.ReactNode }) {
                   {currentPath === '/dashboard/calendar' && (
                     <div className="p-4 bg-background">
                       <Calendar />
+                    </div>
+                  )}
+                  {currentPath === '/dashboard/Info' && (
+                    <div className="p-4 bg-background">
+                      <AccordionDemo />
                     </div>
                   )}
                 </div>

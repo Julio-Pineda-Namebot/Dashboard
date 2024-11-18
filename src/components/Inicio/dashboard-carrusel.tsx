@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const images = [
-  'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/02/30-mejores-heroes-ultimos-30-anos-2243371.jpg?tf=3840x',
+  'https://i.pinimg.com/736x/74/85/ce/7485ceeba34d98280de69ed4b0ca3301.jpg',
   'https://image.api.playstation.com/vulcan/ap/rnd/202404/0814/43fc59eaba549464854849b056487fa1bf6d3d8dd9445111.png',
   'https://assetsio.gnwcdn.com/eurogamer-zjp1vx.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp',
 ];
